@@ -36,7 +36,6 @@
             $sql = "SELECT DISTINCT cityT FROM place";
             $results = mysqli_query($db, $sql);
         
-        
          ?>
        
 
