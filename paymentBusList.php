@@ -121,6 +121,7 @@ $busDes = "";
                 
                 <tr>
                     <th>Bus Name</th>
+                    <th>Bus Type</th>
                     <th>Bus Date</th>
                     <th>Bus Time</th>
                     <th>Bus From</th>
@@ -134,11 +135,20 @@ $busDes = "";
                    
 
                     <td><?php echo $row['busName']; ?></td>
+                    <td><?php 
+                        if($row['busType'] == 'acBus'){
+                            echo "AC Bus";
+                        }
+                        
+                        else {
+                            echo "Non AC Bus";
+                        } 
+                    ?></td>
                     <td><?php echo $row['busDate']; ?></td>
                     <td><?php echo $row['busTime']; ?></td>
                     <td><?php echo $row['busDesA']; ?></td>
                     <td><?php echo $row['busDesB']; ?></td>
-                    <td><input type="text" style="display:none"; value="<?php echo $row['id']; ?>" name="idVal">
+                    <td><input type="text" style="display:block"; value="<?php echo $row['id']; ?>" name="idVal">
                     <input type="text" style="display:none"; value="<?php echo $row['busTime']; ?>" name="bTime">
                     <input type="submit" class="btn btn-success" name="buslist-submit" value="Pending Payment"></td>
                     

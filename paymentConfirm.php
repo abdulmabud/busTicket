@@ -69,6 +69,16 @@
             
             
         }
+
+        // ac non-ac bus travel number count
+
+        $sql = "SELECT acBus, noAcBus FROM user WHERE email = '$email' ";
+        $res = mysqli_query($db, $sql);
+        while($row = mysqli_fetch_assoc($res)){
+            $acBus = $row['acBus'];
+            $nonAcBus = $row['nonAcBus'];
+        }
+
         
     }
 

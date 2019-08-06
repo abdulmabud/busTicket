@@ -11,6 +11,7 @@ if(isset($_POST['submit'])){
     
     $busDate = $_POST['busDate'];
     $busTime = $_POST['busTime'];
+    $busType = $_POST['busType'];
     
     
     
@@ -148,7 +149,7 @@ if(isset($_POST['submit'])){
     $busName = $_POST['busName'];
     $busDes = $busDesA.$busDesB;
     
-    $sql = "INSERT INTO bus(busName,busDesA,busDesB,busDate,busTime) VALUES('$busName','$busDesA','$busDesB','$busDate','$busTime')";
+    $sql = "INSERT INTO bus(busName,busDesA,busDesB,busDate,busTime, busType) VALUES('$busName','$busDesA','$busDesB','$busDate','$busTime', '$busType')";
     
     if(mysqli_query($db, $sql)){
         

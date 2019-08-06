@@ -48,7 +48,11 @@
             <?php endwhile; ?>
 
         </select>
-
+        <label for="">Bus Type</label>
+        <select name="busType" id="">
+        <option value="acBus">AC Bus</option>
+        <option value="nonAcBus">Non AC Bus</option>
+        </select>
 
         <label for="ldate" style="margin-top:20px;">SELECT DATE</label><br>
         <input type="date" data-date-inline-picker="true" name="busDate"  required style="margin-right: 30px;">
@@ -64,6 +68,7 @@
 
         <br><br>
 
+        
 
         <input type="submit" value="Add Bus" name="submit">
 

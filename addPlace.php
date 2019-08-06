@@ -8,13 +8,14 @@ if(isset($_POST['addPlace-submit'])){
     $cityF = $_POST['cityF'];
     $cityT = $_POST['cityT'];
     $fare = $_POST['fare'];
+    $busType = $_POST['busType'];
     
     
-    $sql = "INSERT INTO place(cityF, cityT,fare) VALUES('$cityF', '$cityT','$fare')";
+    $sql = "INSERT INTO place(cityF, cityT,fare, busType) VALUES('$cityF', '$cityT','$fare', '$busType')";
     
     if(mysqli_query($db, $sql)){
         
-        $c = "Inserted";
+        $c = "Place Inserted Successfully";
         
     }
     
@@ -66,7 +67,7 @@ input[type=text]{
     
 
 
-<form action="" method="post">
+<form action="" method="post" class="form-group">
     
     <table style="margin-left:320px";>
         
@@ -81,6 +82,15 @@ input[type=text]{
            <td><input type="text" name="cityT" placeholder="To" required></td>
            
             
+        </tr>
+        <tr>
+            <td><label>Bus Type</label></td>
+            <td>
+                <select name="busType" id="" class="form-control">
+                    <option value="acBus">AC Bus</option>
+                    <option value="nonAcBus">Non AC Bus</option>
+                </select>
+            </td>
         </tr>
         
         

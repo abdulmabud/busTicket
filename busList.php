@@ -122,6 +122,7 @@ $busDes = "";
                 <tr>
                     
                     <th>Bus Name</th>
+                    <th>Bus Type</th>
                     <th>Bus Date</th>
                     <th>Bus Time</th>
                     <th>Bus From</th>
@@ -135,6 +136,16 @@ $busDes = "";
                    
 
                     <td><?php echo $row['busName']; ?></td>
+                    <td><?php
+                      if($row['busType'] == 'acBus'){
+                        echo "AC Bus";
+                      }
+                      
+                      else {
+                          echo "Non AC Bus";
+                      } 
+                    
+                    ?></td>
                     <td><?php echo $row['busDate']; ?></td>
                     <td><?php echo $row['busTime']; ?></td>
                     <td><?php echo $row['busDesA']; ?></td>
