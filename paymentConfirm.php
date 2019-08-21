@@ -72,12 +72,37 @@
 
         // ac non-ac bus travel number count
 
-        $sql = "SELECT acBus, noAcBus FROM user WHERE email = '$email' ";
+        $bus_id = $_SESSION['busId'];
+      
+        $sql = "SELECT busType FROM bus WHERE id = '$bus_id' ";
+        $r = mysqli_query($db, $sql);
+        $busType = mysqli_fetch_assoc($r);
+        $busType = $busType['busType'];
+
+        $sql = "SELECT acBus, nonAcBus FROM users WHERE email = '$email' ";
+       
         $res = mysqli_query($db, $sql);
+        
         while($row = mysqli_fetch_assoc($res)){
             $acBus = $row['acBus'];
             $nonAcBus = $row['nonAcBus'];
+            $acBus = (int)$acBus;
+            $nonAcBus = (int)$nonAcBus;
         }
+        if($busType == 'acBus'){
+            $acBus = $acBus + 1;
+            $tt = gettype($acBus);
+            
+        }
+        else if($busType == 'nonAcBus'){
+            $nonAcBus = $nonAcBus + 1;
+        }
+        $sql = "UPDATE users SET acBus='$acBus' WHERE email = '$email' ";
+        mysqli_query($db, $sql);
+        
+        $sql = "UPDATE users SET nonAcBus='$nonAcBus' WHERE email = '$email' ";
+        mysqli_query($db, $sql);
+        
 
         
     }
@@ -124,6 +149,7 @@ $result = mysqli_query($db, $sql);
 
 
     
+$bus_id = $_SESSION['busId'];
 
 
 ?>

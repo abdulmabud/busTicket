@@ -30,8 +30,9 @@ if(isset($_POST['submit'])){
     
     $busDesA=  $_SESSION['busDesA']; 
     $busDesB = $_SESSION['busDesB'];
+    $busType = $_SESSION['busType'];
     
-    $sql = "SELECT fare FROM place WHERE cityF='$busDesA' AND cityT = '$busDesB'";
+    $sql = "SELECT fare FROM place WHERE cityF='$busDesA' AND cityT = '$busDesB' AND busType = '$busType' ";
     $result = mysqli_query($db, $sql);
     
     while($row = mysqli_fetch_assoc($result)){

@@ -64,7 +64,8 @@ $busDes = "";
         
          $_SESSION['busTime'] = $bTime;
         
-        
+        $busType = $_POST['busType'];
+        $_SESSION['busType'] = $busType;
         
        
         
@@ -103,7 +104,24 @@ $busDes = "";
 <body>
    <div class="container">
       <?php 
+       $email = $_SESSION['email'];
        
+       $sql = "SELECT acBus, nonAcBus FROM users WHERE email = '$email' ";
+       $res = mysqli_query($db, $sql);
+       $row = mysqli_fetch_assoc($res);
+       $acBus = $row['acBus'];
+       $nonAcBus = $row['nonAcBus'];
+       $acBus = (int)$acBus;
+       $nonAcBus = (int)$nonAcBus;
+      
+       if($acBus > $nonAcBus){
+           
+        echo '<div style="text-align: center;">
+            <h3 style="margin: 10px 0px;">Maximum time you travel with Ac Bus. So, You can try our AC Bus</h3>
+        </div>';
+       }else {
+           
+       }
        $sql = "SELECT * FROM bus WHERE busDate='$c' AND busDesA='$busDesA' AND busDesB='$busDesB'";
        $result = mysqli_query($db, $sql);
        
@@ -152,6 +170,7 @@ $busDes = "";
                     <td><?php echo $row['busDesB']; ?></td>
                     <td><input type="text" style="display:none"; value="<?php echo $row['id']; ?>" name="idVal">
                     <input type="text" style="display:none"; value="<?php echo $row['busTime']; ?>" name="bTime">
+                    <input type="hidden" value="<?php echo $row['busType']; ?>" name="busType">
                     <input type="submit"  class="btn btn-success" name="buslist-submit" value="View Seat"></td>
                     
                    <?php  $noBus = ""; ?>

@@ -56,7 +56,8 @@ $busDes = "";
     if(isset($_POST['buslist-submit'])){
         
         $idVal = $_POST['idVal'];
-         echo $idVal;
+        //  echo $idVal;
+         $_SESSION['busId'] = $idVal;
         
         $idVal = $idVal -1;
         $_SESSION['idVal'] = $idVal;
@@ -148,7 +149,7 @@ $busDes = "";
                     <td><?php echo $row['busTime']; ?></td>
                     <td><?php echo $row['busDesA']; ?></td>
                     <td><?php echo $row['busDesB']; ?></td>
-                    <td><input type="text" style="display:block"; value="<?php echo $row['id']; ?>" name="idVal">
+                    <td><input type="text" style="display:none"; value="<?php echo $row['id']; ?>" name="idVal">
                     <input type="text" style="display:none"; value="<?php echo $row['busTime']; ?>" name="bTime">
                     <input type="submit" class="btn btn-success" name="buslist-submit" value="Pending Payment"></td>
                     
