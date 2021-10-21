@@ -1,103 +1,72 @@
 <?php include 'header.php'; ?>
-
-
-
-
-
 <?php
-
-$one = [];
-
-if($_SESSION['isLogged'] == false && $_SESSION['cLog'] == false){
-    
-    
+    $one = [];
+    if($_SESSION['isLogged'] == false && $_SESSION['cLog'] == false){
         header('Location: search.php');
-    
-}
+    }
 
+    if(isset($_POST['submit'])){
+        $_SESSION['busDate'] = $_POST['bDate'];
+        $_SESSION['busTime'] = $_POST['bTime'];
+    }
 
-if(isset($_POST['submit'])){
-    
-    
-    $_SESSION['busDate'] = $_POST['bDate'];
-    $_SESSION['busTime'] = $_POST['bTime'];
-}
-
-
-// fare from datebase using destination
-    
-    
-    
+    // fare from datebase using destination
     $busDesA=  $_SESSION['busDesA']; 
     $busDesB = $_SESSION['busDesB'];
     $busType = $_SESSION['busType'];
     
     $sql = "SELECT fare FROM place WHERE cityF='$busDesA' AND cityT = '$busDesB' AND busType = '$busType' ";
     $result = mysqli_query($db, $sql);
-    
-    while($row = mysqli_fetch_assoc($result)){
-        
-        $fare = $row['fare'];
-        
-        
+    // var_dump($result);
+    while($row = mysqli_fetch_assoc($result)){ 
+        $fare = $row['fare']; 
        require_once('function.php');
         $disAmount = readDiscount();
-        $fare = $fare - $disAmount;
-        
+        $fare = $fare - $disAmount; 
         $_SESSION['fare'] = $fare;
     }
+        
+    $numOneSeat = 'A1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwoSeat = 'A2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThreeSeat = 'A3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numFourSeat = 'A4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numFiveSeat = 'B1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numSixSeat = 'B2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numSevenSeat = 'B3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numEightSeat = 'B4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numNineSeat = 'C1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTenSeat = 'C2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numElevenSeat = 'C3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwelveSeat = 'C4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirteenSeat = 'D1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numFourteenSeat = 'D2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numFifteenSeat = 'D3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numSixteenSeat = 'D4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
 
-    
-    
-   
-
-
-$numOneSeat = 'A1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwoSeat = 'A2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThreeSeat = 'A3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numFourSeat = 'A4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numFiveSeat = 'B1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numSixSeat = 'B2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numSevenSeat = 'B3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numEightSeat = 'B4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numNineSeat = 'C1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTenSeat = 'C2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numElevenSeat = 'C3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
- $numTwelveSeat = 'C4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirteenSeat = 'D1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numFourteenSeat = 'D2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numFifteenSeat = 'D3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numSixteenSeat = 'D4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-
-$numSeventeenSeat = 'E1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numEightteenSeat = 'E2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numNineteenSeat = 'E3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentySeat = 'E4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentyoneSeat = 'F1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentytwoSeat = 'F2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentythreeSeat = 'F3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentyfourSeat = 'F4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentyfiveSeat = 'G1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentysixSeat = 'G2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentysevenSeat = 'G3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentyeightSeat = 'G4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numTwentynineSeat = 'H1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtySeat = 'H2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtyoneSeat = 'H3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtytwoSeat = 'H4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtythreeSeat = 'I1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtyfourSeat = 'I2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtyfiveSeat = 'I3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtysixSeat = 'I4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtysevenSeat = 'J1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtyeightSeat = 'J2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numThirtynineSeat = 'J3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-$numFourtySeat = 'J4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
-
-
-
-
-
+    $numSeventeenSeat = 'E1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numEightteenSeat = 'E2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numNineteenSeat = 'E3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentySeat = 'E4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentyoneSeat = 'F1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentytwoSeat = 'F2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentythreeSeat = 'F3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentyfourSeat = 'F4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentyfiveSeat = 'G1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentysixSeat = 'G2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentysevenSeat = 'G3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentyeightSeat = 'G4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numTwentynineSeat = 'H1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtySeat = 'H2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtyoneSeat = 'H3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtytwoSeat = 'H4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtythreeSeat = 'I1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtyfourSeat = 'I2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtyfiveSeat = 'I3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtysixSeat = 'I4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtysevenSeat = 'J1'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtyeightSeat = 'J2'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numThirtynineSeat = 'J3'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
+    $numFourtySeat = 'J4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SESSION['busDesA'].".".$_SESSION['busDesB'].".".$_SESSION['idVal'];
 
 // set global value for seatNext.php page (use for database value change)
 
@@ -120,29 +89,29 @@ $numFourtySeat = 'J4'.".".$_SESSION['busDate'].".".$_SESSION['busTime'].".".$_SE
 
 
     $_SESSION['numSeventeen'] = $numSeventeenSeat;
-$_SESSION['numEightteen'] = $numEightteenSeat;
-$_SESSION['numNineteen'] = $numNineteenSeat;
-$_SESSION['numTwenty'] = $numTwentySeat;
-$_SESSION['numTwentyone'] = $numTwentyoneSeat;
-$_SESSION['numTwentytwo'] = $numTwentytwoSeat;
-$_SESSION['numTwentythree'] = $numTwentythreeSeat;
-$_SESSION['numTwentyfour'] = $numTwentyfourSeat;
-$_SESSION['numTwentyfive'] = $numTwentyfiveSeat;
-$_SESSION['numTwentysix'] = $numTwentysixSeat;
-$_SESSION['numTwentyseven'] = $numTwentysevenSeat;
-$_SESSION['numTwentyeight'] = $numTwentyeightSeat;
-$_SESSION['numTwentynine'] = $numTwentynineSeat;
-$_SESSION['numThirty'] = $numThirtySeat;
-$_SESSION['numThirtyone'] = $numThirtyoneSeat;
-$_SESSION['numThirtytwo'] = $numThirtytwoSeat;
-$_SESSION['numThirtythree'] = $numThirtythreeSeat;
-$_SESSION['numThirtyfour'] = $numThirtyfourSeat;
-$_SESSION['numThirtyfive'] = $numThirtyfiveSeat;
-$_SESSION['numThirtysix'] = $numThirtysixSeat;
-$_SESSION['numThirtyseven'] = $numThirtysevenSeat;
-$_SESSION['numThirtyeight'] = $numThirtyeightSeat;
-$_SESSION['numThirtynine'] = $numThirtynineSeat;
-$_SESSION['numFourty'] = $numFourtySeat;
+    $_SESSION['numEightteen'] = $numEightteenSeat;
+    $_SESSION['numNineteen'] = $numNineteenSeat;
+    $_SESSION['numTwenty'] = $numTwentySeat;
+    $_SESSION['numTwentyone'] = $numTwentyoneSeat;
+    $_SESSION['numTwentytwo'] = $numTwentytwoSeat;
+    $_SESSION['numTwentythree'] = $numTwentythreeSeat;
+    $_SESSION['numTwentyfour'] = $numTwentyfourSeat;
+    $_SESSION['numTwentyfive'] = $numTwentyfiveSeat;
+    $_SESSION['numTwentysix'] = $numTwentysixSeat;
+    $_SESSION['numTwentyseven'] = $numTwentysevenSeat;
+    $_SESSION['numTwentyeight'] = $numTwentyeightSeat;
+    $_SESSION['numTwentynine'] = $numTwentynineSeat;
+    $_SESSION['numThirty'] = $numThirtySeat;
+    $_SESSION['numThirtyone'] = $numThirtyoneSeat;
+    $_SESSION['numThirtytwo'] = $numThirtytwoSeat;
+    $_SESSION['numThirtythree'] = $numThirtythreeSeat;
+    $_SESSION['numThirtyfour'] = $numThirtyfourSeat;
+    $_SESSION['numThirtyfive'] = $numThirtyfiveSeat;
+    $_SESSION['numThirtysix'] = $numThirtysixSeat;
+    $_SESSION['numThirtyseven'] = $numThirtysevenSeat;
+    $_SESSION['numThirtyeight'] = $numThirtyeightSeat;
+    $_SESSION['numThirtynine'] = $numThirtynineSeat;
+    $_SESSION['numFourty'] = $numFourtySeat;
 
 
 
@@ -150,55 +119,53 @@ $_SESSION['numFourty'] = $numFourtySeat;
 
 
 
-$imgSrc1=$imgSrc2=$imgSrc3=$imgSrc4=$imgSrc5=$imgSrc6=$imgSrc7=$imgSrc8=$imgSrc9=$imgSrc10=
-$imgSrc11=$imgSrc12=$imgSrc13=$imgSrc14=$imgSrc15=$imgSrc16=$imgSrc17=$imgSrc18=$imgSrc19=$imgSrc20=
-$imgSrc21=$imgSrc22=$imgSrc23=$imgSrc24=$imgSrc25=$imgSrc26=$imgSrc27=$imgSrc28=$imgSrc29=$imgSrc30=
-$imgSrc31=$imgSrc32=$imgSrc33=$imgSrc34=$imgSrc35=$imgSrc36=$imgSrc37=$imgSrc38=$imgSrc39=$imgSrc40=
-  "images/empty.PNG";
+    $imgSrc1=$imgSrc2=$imgSrc3=$imgSrc4=$imgSrc5=$imgSrc6=$imgSrc7=$imgSrc8=$imgSrc9=$imgSrc10=
+    $imgSrc11=$imgSrc12=$imgSrc13=$imgSrc14=$imgSrc15=$imgSrc16=$imgSrc17=$imgSrc18=$imgSrc19=$imgSrc20=
+    $imgSrc21=$imgSrc22=$imgSrc23=$imgSrc24=$imgSrc25=$imgSrc26=$imgSrc27=$imgSrc28=$imgSrc29=$imgSrc30=
+    $imgSrc31=$imgSrc32=$imgSrc33=$imgSrc34=$imgSrc35=$imgSrc36=$imgSrc37=$imgSrc38=$imgSrc39=$imgSrc40=
+    "images/empty.PNG";
 
 
-$imgF1="imgChange1()";
-$imgF2="imgChange2()";
-$imgF3="imgChange3()";
-$imgF4="imgChange4()";
-$imgF5="imgChange5()";
-$imgF6="imgChange6()";
-$imgF7="imgChange7()";
-$imgF8="imgChange8()";
-$imgF9="imgChange9()";
-$imgF10="imgChange10()"; 
-$imgF11="imgChange11()";
-$imgF12="imgChange12()";
-$imgF13="imgChange13()";
-$imgF14="imgChange14()";
-$imgF15="imgChange15()";
-$imgF16="imgChange16()";
-$imgF17="imgChange17()";
-$imgF18="imgChange18()";
-$imgF19="imgChange19()";
-$imgF20="imgChange20()"; 
-$imgF21="imgChange21()";
-$imgF22="imgChange22()";
-$imgF23="imgChange23()";
-$imgF24="imgChange24()";
-$imgF25="imgChange25()";
-$imgF26="imgChange26()";
-$imgF27="imgChange27()";
-$imgF28="imgChange28()";
-$imgF29="imgChange29()";
-$imgF30="imgChange30()"; 
-$imgF31="imgChange31()";
-$imgF32="imgChange32()";
-$imgF33="imgChange33()";
-$imgF34="imgChange34()";
-$imgF35="imgChange35()";
-$imgF36="imgChange36()";
-$imgF37="imgChange37()";
-$imgF38="imgChange38()";
-$imgF39="imgChange39()";
-$imgF40= "imgChange40()";
- 
-      
+    $imgF1="imgChange1()";
+    $imgF2="imgChange2()";
+    $imgF3="imgChange3()";
+    $imgF4="imgChange4()";
+    $imgF5="imgChange5()";
+    $imgF6="imgChange6()";
+    $imgF7="imgChange7()";
+    $imgF8="imgChange8()";
+    $imgF9="imgChange9()";
+    $imgF10="imgChange10()"; 
+    $imgF11="imgChange11()";
+    $imgF12="imgChange12()";
+    $imgF13="imgChange13()";
+    $imgF14="imgChange14()";
+    $imgF15="imgChange15()";
+    $imgF16="imgChange16()";
+    $imgF17="imgChange17()";
+    $imgF18="imgChange18()";
+    $imgF19="imgChange19()";
+    $imgF20="imgChange20()"; 
+    $imgF21="imgChange21()";
+    $imgF22="imgChange22()";
+    $imgF23="imgChange23()";
+    $imgF24="imgChange24()";
+    $imgF25="imgChange25()";
+    $imgF26="imgChange26()";
+    $imgF27="imgChange27()";
+    $imgF28="imgChange28()";
+    $imgF29="imgChange29()";
+    $imgF30="imgChange30()"; 
+    $imgF31="imgChange31()";
+    $imgF32="imgChange32()";
+    $imgF33="imgChange33()";
+    $imgF34="imgChange34()";
+    $imgF35="imgChange35()";
+    $imgF36="imgChange36()";
+    $imgF37="imgChange37()";
+    $imgF38="imgChange38()";
+    $imgF39="imgChange39()";
+    $imgF40= "imgChange40()";
 
 
 // Code for A1 seat
@@ -215,7 +182,6 @@ $imgF40= "imgChange40()";
           $a1 = $row['val'];
           
           //echo $a1;
-          
           
           if($a1==0){
               $_SESSION['oneSeat'] = "unchecked";
@@ -238,9 +204,7 @@ if($_SESSION['oneSeat'] == "checked"){
     $num1 = "false";
     
     $imgSrc1 = "images/block.PNG";
-    $imgF1 = "";
-
-    
+    $imgF1 = "";   
     
 } 
 else{
@@ -248,20 +212,15 @@ else{
     
 }
 
-
 // Code for A2 seat
 
  $result = mysqli_query($db, "select * from seat where state='$numTwoSeat'");
-      
       
       if (mysqli_num_rows($result) > 0) {
       
       while($row = mysqli_fetch_assoc($result)) {
           
-          $a2 = $row['val'];
-          
-       
-          
+          $a2 = $row['val'];     
           if($a2==0){
               $_SESSION['twoSeat'] = "unchecked";
           }
@@ -270,9 +229,6 @@ else{
           }
       }
       }
-          
- 
-
 
 if($_SESSION['twoSeat'] == "checked"){
     $num2 = "false";
@@ -295,10 +251,6 @@ else{
       while($row = mysqli_fetch_assoc($result)) {
           
           $a3 = $row['val'];
-          
-        
-          
-          
           if($a3==0){
               $_SESSION['threeSeat'] = "unchecked";
           }
@@ -322,17 +274,12 @@ else{
 // Code for A4 seat
 
  $result = mysqli_query($db, "select * from seat where state='$numFourSeat'");
-      
-      
+         
       if (mysqli_num_rows($result) > 0) {
       
       while($row = mysqli_fetch_assoc($result)) {
           
           $a4 = $row['val'];
-          
-        
-          
-          
           if($a4==0){
               $_SESSION['fourSeat'] = "unchecked";
           }
@@ -352,21 +299,15 @@ else{
     $num4 = "true";
 }
 
-
-
 // Code for B1 seat
 
  $result = mysqli_query($db, "select * from seat where state='$numFiveSeat'");
-      
-      
+        
       if (mysqli_num_rows($result) > 0) {
       
       while($row = mysqli_fetch_assoc($result)) {
           
           $b1 = $row['val'];
-          
-    
-          
           
           if($b1==0){
               $_SESSION['fiveSeat'] = "unchecked";
@@ -387,7 +328,6 @@ else{
     $num5 = "true";
 }
 
-
 // Code for B2 seat
 
  $result = mysqli_query($db, "select * from seat where state='$numSixSeat'");
@@ -398,8 +338,6 @@ else{
       while($row = mysqli_fetch_assoc($result)) {
           
           $b2 = $row['val'];
-          
-        
           
           if($b2==0){
               $_SESSION['sixSeat'] = "unchecked";
@@ -1652,63 +1590,63 @@ else{
     <title>PHP</title>
 
     <style>
+        .allSeat {
 
-
-
-        .allSeat{
-            
             float: left;
             padding-top: 40px;
             padding-left: 20px;
-            
-            
+
+
             border: 1px solid #dec8c8;
-            
+
         }
-        .img{
-            
+
+        .img {
+
             float: right;
             position: absolute;
             padding: 30px 0px 0px 165px;
-           
+
         }
-        .allSeat label{
-                
-                
-                font-size: 200%;
-                margin-right: 10px;
+
+        .allSeat label {
+
+
+            font-size: 200%;
+            margin-right: 10px;
             width: 30px;
             height: 30px;
-                
-                
-            }
-        
-        
-        .fare{
-            
-            
-            float: right;
-            
-            
-            padding-right: 100px;
-            
-            width: 650px;
-            
+
+
         }
-        
-        
-        
+
+
+        .fare {
+
+
+            float: right;
+
+
+            padding-right: 100px;
+
+            width: 650px;
+
+        }
+
+
+
         input[type=text] {
-    width: 150%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-        input[type=submit]{
-            
+            width: 150%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+
             padding: 10px 50px;
             display: inline-block;
             border: 1px solid #304657;
@@ -1716,29 +1654,26 @@ else{
             background-color: #22af0f;
             font-weight: bold;
             font-size: 150%;
-            
+
         }
-        
-        .form1{
-            
+
+        .form1 {
+
             position: absolute;
             margin-top: 350px;
             margin-left: 400px;
         }
-        
-        .le{
-            
+
+        .le {
+
             font-size: 150%;
         }
-        
-        input[type=checkbox]{
-           display: none;
-          
+
+        input[type=checkbox] {
+            display: none;
+
         }
-        
-        
-        
-        </style>
+    </style>
 
 
 </head>
@@ -1760,55 +1695,142 @@ else{
 
             <div class="allSeat">
 
-                <input type="checkbox" id="s1" name="one[]" value="a1" onclick="return <?php echo " $num1 "; ?> " <?php echo $_SESSION['oneSeat']; ?> > <label title="A1"  for="s1"> <img src="<?php echo $imgSrc1; ?>" id="s1s" onclick="<?php echo $imgF1; ?>" alt=""> </label>
+                <input type="checkbox" id="s1" name="one[]" value="a1" onclick="return <?php echo " $num1 "; ?> "
+                    <?php echo $_SESSION['oneSeat']; ?>> <label title="A1" for="s1"> <img src="<?php echo $imgSrc1; ?>"
+                        id="s1s" onclick="<?php echo $imgF1; ?>" alt=""> </label>
 
 
-                <input type="checkbox" id="s2" name="one[]" value="a2" onclick="return <?php echo " $num2 "; ?> " <?php echo $_SESSION['twoSeat']; ?> > <label title="A2"  for="s2" style="margin-right:30px;"><img src="<?php echo $imgSrc2; ?>" id="s2s" onclick="<?php echo $imgF2; ?>" alt=""></label>
+                <input type="checkbox" id="s2" name="one[]" value="a2" onclick="return <?php echo " $num2 "; ?> "
+                    <?php echo $_SESSION['twoSeat']; ?>> <label title="A2" for="s2" style="margin-right:30px;"><img
+                        src="<?php echo $imgSrc2; ?>" id="s2s" onclick="<?php echo $imgF2; ?>" alt=""></label>
 
-                <input type="checkbox" id="s3" name="one[]" value="a3" onclick="return <?php echo " $num3 "; ?> " <?php echo $_SESSION['threeSeat']; ?> > <label title="A3"  for="s3"><img src="<?php echo $imgSrc3; ?>" id="s3s" onclick="<?php echo $imgF3; ?>" alt=""></label>
+                <input type="checkbox" id="s3" name="one[]" value="a3" onclick="return <?php echo " $num3 "; ?> "
+                    <?php echo $_SESSION['threeSeat']; ?>> <label title="A3" for="s3"><img src="<?php echo $imgSrc3; ?>"
+                        id="s3s" onclick="<?php echo $imgF3; ?>" alt=""></label>
 
-                <input type="checkbox" id="s4" name="one[]" value="a4" onclick="return <?php echo " $num4 "; ?> " <?php echo $_SESSION['fourSeat']; ?> > <label title="A4"  for="s4"><img src="<?php echo $imgSrc4; ?>" id="s4s" onclick="<?php echo $imgF4; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s4" name="one[]" value="a4" onclick="return <?php echo " $num4 "; ?> "
+                    <?php echo $_SESSION['fourSeat']; ?>> <label title="A4" for="s4"><img src="<?php echo $imgSrc4; ?>"
+                        id="s4s" onclick="<?php echo $imgF4; ?>" alt=""></label> <br>
 
 
-                <input type="checkbox" id="s5" name="one[]" value="b1" onclick="return <?php echo " $num5 "; ?> " <?php echo $_SESSION['fiveSeat']; ?> > <label title="B1"  for="s5"><img src="<?php echo $imgSrc5; ?>" id="s5s" onclick="<?php echo $imgF5; ?>" alt=""></label>
+                <input type="checkbox" id="s5" name="one[]" value="b1" onclick="return <?php echo " $num5 "; ?> "
+                    <?php echo $_SESSION['fiveSeat']; ?>> <label title="B1" for="s5"><img src="<?php echo $imgSrc5; ?>"
+                        id="s5s" onclick="<?php echo $imgF5; ?>" alt=""></label>
 
-                <input type="checkbox" id="s6" name="one[]" value="b2" onclick="return <?php echo " $num6 "; ?> " <?php echo $_SESSION['sixSeat']; ?> > <label title="B2"  for="s6" style="margin-right:30px;"><img src="<?php echo $imgSrc6; ?>" id="s6s" onclick="<?php echo $imgF6; ?>" alt=""></label>
+                <input type="checkbox" id="s6" name="one[]" value="b2" onclick="return <?php echo " $num6 "; ?> "
+                    <?php echo $_SESSION['sixSeat']; ?>> <label title="B2" for="s6" style="margin-right:30px;"><img
+                        src="<?php echo $imgSrc6; ?>" id="s6s" onclick="<?php echo $imgF6; ?>" alt=""></label>
 
-                <input type="checkbox" id="s7" name="one[]" value="b3" onclick="return <?php echo " $num7 "; ?> " <?php echo $_SESSION['sevenSeat']; ?> > <label title="B3"  for="s7"><img src="<?php echo $imgSrc7; ?>" id="s7s" onclick="<?php echo $imgF7; ?>" alt=""></label>
-                <input type="checkbox" id="s8" name="one[]" value="b4" onclick="return <?php echo " $num8 "; ?> " <?php echo $_SESSION['eightSeat']; ?> > <label title="B4"  for="s8"><img src="<?php echo $imgSrc8; ?>" id="s8s" onclick="<?php echo $imgF8; ?>" alt=""></label> <br>
-                <input type="checkbox" id="s9" name="one[]" value="c1" onclick="return <?php echo " $num9 "; ?> " <?php echo $_SESSION[ 'nineSeat' ]; ?> > <label title="C1"  for="s9"><img src="<?php echo $imgSrc9; ?>" id="s9s" onclick="<?php echo $imgF9; ?>" alt=""></label>
-                <input type="checkbox" id="s10" name="one[]" value="c2" onclick="return <?php echo " $num10 "; ?> " <?php echo $_SESSION[ 'tenSeat' ]; ?> > <label title="C2"  for="s10" style="margin-right:30px;"><img src="<?php echo $imgSrc10; ?>" id="s10s" onclick="<?php echo $imgF10; ?>" alt=""></label>
+                <input type="checkbox" id="s7" name="one[]" value="b3" onclick="return <?php echo " $num7 "; ?> "
+                    <?php echo $_SESSION['sevenSeat']; ?>> <label title="B3" for="s7"><img src="<?php echo $imgSrc7; ?>"
+                        id="s7s" onclick="<?php echo $imgF7; ?>" alt=""></label>
+                <input type="checkbox" id="s8" name="one[]" value="b4" onclick="return <?php echo " $num8 "; ?> "
+                    <?php echo $_SESSION['eightSeat']; ?>> <label title="B4" for="s8"><img src="<?php echo $imgSrc8; ?>"
+                        id="s8s" onclick="<?php echo $imgF8; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s9" name="one[]" value="c1" onclick="return <?php echo " $num9 "; ?> "
+                    <?php echo $_SESSION[ 'nineSeat' ]; ?>> <label title="C1" for="s9"><img
+                        src="<?php echo $imgSrc9; ?>" id="s9s" onclick="<?php echo $imgF9; ?>" alt=""></label>
+                <input type="checkbox" id="s10" name="one[]" value="c2" onclick="return <?php echo " $num10 "; ?> "
+                    <?php echo $_SESSION[ 'tenSeat' ]; ?>> <label title="C2" for="s10" style="margin-right:30px;"><img
+                        src="<?php echo $imgSrc10; ?>" id="s10s" onclick="<?php echo $imgF10; ?>" alt=""></label>
 
-                <input type="checkbox" id="s11" name="one[]" value="c3" onclick="return <?php echo " $num11 "; ?> " <?php echo $_SESSION[ 'elevenSeat' ]; ?> > <label title="C3"  for="s11"><img src="<?php echo $imgSrc11; ?>" id="s11s" onclick="<?php echo $imgF11; ?>" alt=""></label>
-                <input type="checkbox" id="s12" name="one[]" value="c4" onclick="return <?php echo " $num12 "; ?> " <?php echo $_SESSION[ 'twelveSeat' ]; ?> > <label title="C4"  for="s12"><img src="<?php echo $imgSrc12; ?>" id="s12s" onclick="<?php echo $imgF12; ?>" alt=""></label> <br>
-                <input type="checkbox" id="s13" name="one[]" value="d1" onclick="return <?php echo " $num13 "; ?> " <?php echo $_SESSION[ 'thirteenSeat' ]; ?> > <label title="D1"  for="s13"><img src="<?php echo $imgSrc13; ?>" id="s13s" onclick="<?php echo $imgF13; ?>" alt=""></label>
-                <input type="checkbox" id="s14" name="one[]" value="d2" onclick="return <?php echo " $num14 "; ?> " <?php echo $_SESSION[ 'fourteenSeat' ]; ?> > <label title="D2"  for="s14" style="margin-right:30px;"><img src="<?php echo $imgSrc14; ?>" id="s14s" onclick="<?php echo $imgF14; ?>" alt=""></label>
-                <input type="checkbox" id="s15" name="one[]" value="d3" onclick="return <?php echo " $num15 "; ?> " <?php echo $_SESSION[ 'fifteenSeat' ]; ?> > <label title="D3"  for="s15"><img src="<?php echo $imgSrc15; ?>" id="s15s" onclick="<?php echo $imgF15; ?>" alt=""></label>
-                <input type="checkbox" id="s16" name="one[]" value="d4" onclick="return <?php echo " $num16 "; ?> " <?php echo $_SESSION[ 'sixteenSeat' ]; ?> > <label title="D4"  for="s16"><img src="<?php echo $imgSrc16; ?>" id="s16s" onclick="<?php echo $imgF16; ?>" alt=""></label> <br>
-                <input type="checkbox" id="s17" name="one[]" value="e1" onclick="return <?php echo " $num17 "; ?> " <?php echo $_SESSION[ 'seventeenSeat' ]; ?> > <label title="E1"  for="s17"><img src="<?php echo $imgSrc17; ?>" id="s17s" onclick="<?php echo $imgF17; ?>" alt=""></label>
-                <input type="checkbox" id="s18" name="one[]" value="e2" onclick="return <?php echo " $num18 "; ?> " <?php echo $_SESSION[ 'eightteenSeat' ]; ?> > <label title="E2"  for="s18" style="margin-right:30px;"><img src="<?php echo $imgSrc18; ?>" id="s18s" onclick="<?php echo $imgF18; ?>" alt=""></label>
-                <input type="checkbox" id="s19" name="one[]" value="e3" onclick="return <?php echo " $num19 "; ?> " <?php echo $_SESSION[ 'nineteenSeat' ]; ?> > <label title="E3"  for="s19"><img src="<?php echo $imgSrc19; ?>" id="s19s" onclick="<?php echo $imgF19; ?>" alt=""></label>
-                <input type="checkbox" id="s20" name="one[]" value="e4" onclick="return <?php echo " $num20 "; ?> " <?php echo $_SESSION[ 'twentySeat' ]; ?> > <label title="E4"  for="s20"><img src="<?php echo $imgSrc20; ?>" id="s20s" onclick="<?php echo $imgF20; ?>" alt=""></label> <br>
-                <input type="checkbox" id="s21" name="one[]" value="f1" onclick="return <?php echo " $num21 "; ?> " <?php echo $_SESSION[ 'twentyoneSeat' ]; ?> > <label title="F1"  for="s21"><img src="<?php echo $imgSrc21; ?>" id="s21s" onclick="<?php echo $imgF21; ?>" alt=""></label>
-                <input type="checkbox" id="s22" name="one[]" value="f2" onclick="return <?php echo " $num22 "; ?> " <?php echo $_SESSION[ 'twentytwoSeat' ]; ?> > <label title=F2""  for="s22" style="margin-right:30px;"><img src="<?php echo $imgSrc22; ?>" id="s22s" onclick="<?php echo $imgF22; ?>" alt=""></label>
-                <input type="checkbox" id="s23" name="one[]" value="f3" onclick="return <?php echo " $num23 "; ?> " <?php echo $_SESSION[ 'twentythreeSeat' ]; ?> > <label title="F3"  for="s23"><img src="<?php echo $imgSrc23; ?>" id="s23s" onclick="<?php echo $imgF23; ?>" alt=""></label>
-                <input type="checkbox" id="s24" name="one[]" value="f4" onclick="return <?php echo " $num24 "; ?> " <?php echo $_SESSION[ 'twentyfourSeat' ]; ?> > <label title="F4"  for="s24"><img src="<?php echo $imgSrc24; ?>" id="s24s" onclick="<?php echo $imgF24; ?>" alt=""></label> <br>
-                <input type="checkbox" id="s25" name="one[]" value="g1" onclick="return <?php echo " $num25 "; ?> " <?php echo $_SESSION[ 'twentyfiveSeat' ]; ?> > <label title="G1"  for="s25"><img src="<?php echo $imgSrc25; ?>" id="s25s" onclick="<?php echo $imgF25; ?>" alt=""></label>
-                <input type="checkbox" id="s26" name="one[]" value="g2" onclick="return <?php echo " $num26 "; ?> " <?php echo $_SESSION[ 'twentysixSeat' ]; ?> > <label title="G2"  for="s26" style="margin-right:30px;"><img src="<?php echo $imgSrc26; ?>" id="s26s" onclick="<?php echo $imgF26; ?>" alt=""></label>
-                <input type="checkbox" id="s27" name="one[]" value="g3" onclick="return <?php echo " $num27 "; ?> " <?php echo $_SESSION[ 'twentysevenSeat' ]; ?> > <label title="G3"  for="s27"><img src="<?php echo $imgSrc27; ?>" id="s27s" onclick="<?php echo $imgF27; ?>" alt=""></label>
-                <input type="checkbox" id="s28" name="one[]" value="g4" onclick="return <?php echo " $num28 "; ?> " <?php echo $_SESSION[ 'twentyeightSeat' ]; ?> > <label title="G4"  for="s28"><img src="<?php echo $imgSrc28; ?>" id="s28s" onclick="<?php echo $imgF28; ?>" alt=""></label> <br>
-                <input type="checkbox" id="s29" name="one[]" value="h1" onclick="return <?php echo " $num29 "; ?> " <?php echo $_SESSION[ 'twentynineSeat' ]; ?> > <label title="H1"  for="s29"><img src="<?php echo $imgSrc29; ?>" id="s29s" onclick="<?php echo $imgF29; ?>" alt=""></label>
-                <input type="checkbox" id="s30" name="one[]" value="h2" onclick="return <?php echo " $num30 "; ?> " <?php echo $_SESSION[ 'thirtySeat' ]; ?> > <label title="H2"  for="s30" style="margin-right:30px;"><img src="<?php echo $imgSrc30; ?>" id="s30s" onclick="<?php echo $imgF30; ?>" alt=""></label>
-                <input type="checkbox" id="s31" name="one[]" value="h3" onclick="return <?php echo " $num31 "; ?> " <?php echo $_SESSION[ 'thirtyoneSeat' ]; ?> > <label title="H3"  for="s31"><img src="<?php echo $imgSrc31; ?>" id="s31s" onclick="<?php echo $imgF31; ?>" alt=""></label>
-                <input type="checkbox" id="s32" name="one[]" value="h4" onclick="return <?php echo " $num32 "; ?> " <?php echo $_SESSION[ 'thirtytwoSeat' ]; ?> > <label title="H4"  for="s32"><img src="<?php echo $imgSrc32; ?>" id="s32s" onclick="<?php echo $imgF32; ?>" alt=""></label> <br>
-                <input type="checkbox" id="s33" name="one[]" value="i1" onclick="return <?php echo " $num33 "; ?> " <?php echo $_SESSION[ 'thirtythreeSeat' ]; ?> > <label title="I1"  for="s33"><img src="<?php echo $imgSrc33; ?>" id="s33s" onclick="<?php echo $imgF33; ?>" alt=""></label>
-                <input type="checkbox" id="s34" name="one[]" value="i2" onclick="return <?php echo " $num34 "; ?> " <?php echo $_SESSION[ 'thirtyfourSeat' ]; ?> > <label title="I2"  for="s34" style="margin-right:30px;"><img src="<?php echo $imgSrc34; ?>" id="s34s" onclick="<?php echo $imgF34; ?>" alt=""></label>
-                <input type="checkbox" id="s35" name="one[]" value="i3" onclick="return <?php echo " $num35 "; ?> " <?php echo $_SESSION[ 'thirtyfiveSeat' ]; ?> > <label title="I3"  for="s35"><img src="<?php echo $imgSrc35; ?>" id="s35s" onclick="<?php echo $imgF35; ?>" alt=""></label>
-                <input type="checkbox" id="s36" name="one[]" value="i4" onclick="return <?php echo " $num36 "; ?> " <?php echo $_SESSION[ 'thirtysixSeat' ]; ?> > <label title="I4"  for="s36"><img src="<?php echo $imgSrc36; ?>" id="s36s" onclick="<?php echo $imgF36; ?>" alt=""></label> <br>
-                <input type="checkbox" id="s37" name="one[]" value="j1" onclick="return <?php echo " $num37 "; ?> " <?php echo $_SESSION[ 'thirtysevenSeat' ]; ?> > <label title="J1"  for="s37"><img src="<?php echo $imgSrc37; ?>" id="s37s" onclick="<?php echo $imgF37; ?>" alt=""></label>
-                <input type="checkbox" id="s38" name="one[]" value="j2" onclick="return <?php echo " $num38 "; ?> " <?php echo $_SESSION[ 'thirtyeightSeat' ]; ?> > <label title="J2"  for="s38" style="margin-right:30px;"><img src="<?php echo $imgSrc38; ?>" id="s38s" onclick="<?php echo $imgF38; ?>" alt=""></label>
-                <input type="checkbox" id="s39" name="one[]" value="j3" onclick="return <?php echo " $num39 "; ?> " <?php echo $_SESSION[ 'thirtynineSeat' ]; ?> > <label title="J3"  for="s39"><img src="<?php echo $imgSrc39; ?>" id="s39s" onclick="<?php echo $imgF39; ?>" alt=""></label>
-                <input type="checkbox" id="s40" name="one[]" value="j4" onclick="return <?php echo " $num40 "; ?> " <?php echo $_SESSION[ 'fourtySeat' ]; ?> > <label title="J4"  for="s40"><img src="<?php echo $imgSrc40; ?>" id="s40s" onclick="<?php echo $imgF40; ?>" alt=""></label>
+                <input type="checkbox" id="s11" name="one[]" value="c3" onclick="return <?php echo " $num11 "; ?> "
+                    <?php echo $_SESSION[ 'elevenSeat' ]; ?>> <label title="C3" for="s11"><img
+                        src="<?php echo $imgSrc11; ?>" id="s11s" onclick="<?php echo $imgF11; ?>" alt=""></label>
+                <input type="checkbox" id="s12" name="one[]" value="c4" onclick="return <?php echo " $num12 "; ?> "
+                    <?php echo $_SESSION[ 'twelveSeat' ]; ?>> <label title="C4" for="s12"><img
+                        src="<?php echo $imgSrc12; ?>" id="s12s" onclick="<?php echo $imgF12; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s13" name="one[]" value="d1" onclick="return <?php echo " $num13 "; ?> "
+                    <?php echo $_SESSION[ 'thirteenSeat' ]; ?>> <label title="D1" for="s13"><img
+                        src="<?php echo $imgSrc13; ?>" id="s13s" onclick="<?php echo $imgF13; ?>" alt=""></label>
+                <input type="checkbox" id="s14" name="one[]" value="d2" onclick="return <?php echo " $num14 "; ?> "
+                    <?php echo $_SESSION[ 'fourteenSeat' ]; ?>> <label title="D2" for="s14"
+                    style="margin-right:30px;"><img src="<?php echo $imgSrc14; ?>" id="s14s"
+                        onclick="<?php echo $imgF14; ?>" alt=""></label>
+                <input type="checkbox" id="s15" name="one[]" value="d3" onclick="return <?php echo " $num15 "; ?> "
+                    <?php echo $_SESSION[ 'fifteenSeat' ]; ?>> <label title="D3" for="s15"><img
+                        src="<?php echo $imgSrc15; ?>" id="s15s" onclick="<?php echo $imgF15; ?>" alt=""></label>
+                <input type="checkbox" id="s16" name="one[]" value="d4" onclick="return <?php echo " $num16 "; ?> "
+                    <?php echo $_SESSION[ 'sixteenSeat' ]; ?>> <label title="D4" for="s16"><img
+                        src="<?php echo $imgSrc16; ?>" id="s16s" onclick="<?php echo $imgF16; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s17" name="one[]" value="e1" onclick="return <?php echo " $num17 "; ?> "
+                    <?php echo $_SESSION[ 'seventeenSeat' ]; ?>> <label title="E1" for="s17"><img
+                        src="<?php echo $imgSrc17; ?>" id="s17s" onclick="<?php echo $imgF17; ?>" alt=""></label>
+                <input type="checkbox" id="s18" name="one[]" value="e2" onclick="return <?php echo " $num18 "; ?> "
+                    <?php echo $_SESSION[ 'eightteenSeat' ]; ?>> <label title="E2" for="s18"
+                    style="margin-right:30px;"><img src="<?php echo $imgSrc18; ?>" id="s18s"
+                        onclick="<?php echo $imgF18; ?>" alt=""></label>
+                <input type="checkbox" id="s19" name="one[]" value="e3" onclick="return <?php echo " $num19 "; ?> "
+                    <?php echo $_SESSION[ 'nineteenSeat' ]; ?>> <label title="E3" for="s19"><img
+                        src="<?php echo $imgSrc19; ?>" id="s19s" onclick="<?php echo $imgF19; ?>" alt=""></label>
+                <input type="checkbox" id="s20" name="one[]" value="e4" onclick="return <?php echo " $num20 "; ?> "
+                    <?php echo $_SESSION[ 'twentySeat' ]; ?>> <label title="E4" for="s20"><img
+                        src="<?php echo $imgSrc20; ?>" id="s20s" onclick="<?php echo $imgF20; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s21" name="one[]" value="f1" onclick="return <?php echo " $num21 "; ?> "
+                    <?php echo $_SESSION[ 'twentyoneSeat' ]; ?>> <label title="F1" for="s21"><img
+                        src="<?php echo $imgSrc21; ?>" id="s21s" onclick="<?php echo $imgF21; ?>" alt=""></label>
+                <input type="checkbox" id="s22" name="one[]" value="f2" onclick="return <?php echo " $num22 "; ?> "
+                    <?php echo $_SESSION[ 'twentytwoSeat' ]; ?>> <label title=F2"" for="s22"
+                    style="margin-right:30px;"><img src="<?php echo $imgSrc22; ?>" id="s22s"
+                        onclick="<?php echo $imgF22; ?>" alt=""></label>
+                <input type="checkbox" id="s23" name="one[]" value="f3" onclick="return <?php echo " $num23 "; ?> "
+                    <?php echo $_SESSION[ 'twentythreeSeat' ]; ?>> <label title="F3" for="s23"><img
+                        src="<?php echo $imgSrc23; ?>" id="s23s" onclick="<?php echo $imgF23; ?>" alt=""></label>
+                <input type="checkbox" id="s24" name="one[]" value="f4" onclick="return <?php echo " $num24 "; ?> "
+                    <?php echo $_SESSION[ 'twentyfourSeat' ]; ?>> <label title="F4" for="s24"><img
+                        src="<?php echo $imgSrc24; ?>" id="s24s" onclick="<?php echo $imgF24; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s25" name="one[]" value="g1" onclick="return <?php echo " $num25 "; ?> "
+                    <?php echo $_SESSION[ 'twentyfiveSeat' ]; ?>> <label title="G1" for="s25"><img
+                        src="<?php echo $imgSrc25; ?>" id="s25s" onclick="<?php echo $imgF25; ?>" alt=""></label>
+                <input type="checkbox" id="s26" name="one[]" value="g2" onclick="return <?php echo " $num26 "; ?> "
+                    <?php echo $_SESSION[ 'twentysixSeat' ]; ?>> <label title="G2" for="s26"
+                    style="margin-right:30px;"><img src="<?php echo $imgSrc26; ?>" id="s26s"
+                        onclick="<?php echo $imgF26; ?>" alt=""></label>
+                <input type="checkbox" id="s27" name="one[]" value="g3" onclick="return <?php echo " $num27 "; ?> "
+                    <?php echo $_SESSION[ 'twentysevenSeat' ]; ?>> <label title="G3" for="s27"><img
+                        src="<?php echo $imgSrc27; ?>" id="s27s" onclick="<?php echo $imgF27; ?>" alt=""></label>
+                <input type="checkbox" id="s28" name="one[]" value="g4" onclick="return <?php echo " $num28 "; ?> "
+                    <?php echo $_SESSION[ 'twentyeightSeat' ]; ?>> <label title="G4" for="s28"><img
+                        src="<?php echo $imgSrc28; ?>" id="s28s" onclick="<?php echo $imgF28; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s29" name="one[]" value="h1" onclick="return <?php echo " $num29 "; ?> "
+                    <?php echo $_SESSION[ 'twentynineSeat' ]; ?>> <label title="H1" for="s29"><img
+                        src="<?php echo $imgSrc29; ?>" id="s29s" onclick="<?php echo $imgF29; ?>" alt=""></label>
+                <input type="checkbox" id="s30" name="one[]" value="h2" onclick="return <?php echo " $num30 "; ?> "
+                    <?php echo $_SESSION[ 'thirtySeat' ]; ?>> <label title="H2" for="s30"
+                    style="margin-right:30px;"><img src="<?php echo $imgSrc30; ?>" id="s30s"
+                        onclick="<?php echo $imgF30; ?>" alt=""></label>
+                <input type="checkbox" id="s31" name="one[]" value="h3" onclick="return <?php echo " $num31 "; ?> "
+                    <?php echo $_SESSION[ 'thirtyoneSeat' ]; ?>> <label title="H3" for="s31"><img
+                        src="<?php echo $imgSrc31; ?>" id="s31s" onclick="<?php echo $imgF31; ?>" alt=""></label>
+                <input type="checkbox" id="s32" name="one[]" value="h4" onclick="return <?php echo " $num32 "; ?> "
+                    <?php echo $_SESSION[ 'thirtytwoSeat' ]; ?>> <label title="H4" for="s32"><img
+                        src="<?php echo $imgSrc32; ?>" id="s32s" onclick="<?php echo $imgF32; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s33" name="one[]" value="i1" onclick="return <?php echo " $num33 "; ?> "
+                    <?php echo $_SESSION[ 'thirtythreeSeat' ]; ?>> <label title="I1" for="s33"><img
+                        src="<?php echo $imgSrc33; ?>" id="s33s" onclick="<?php echo $imgF33; ?>" alt=""></label>
+                <input type="checkbox" id="s34" name="one[]" value="i2" onclick="return <?php echo " $num34 "; ?> "
+                    <?php echo $_SESSION[ 'thirtyfourSeat' ]; ?>> <label title="I2" for="s34"
+                    style="margin-right:30px;"><img src="<?php echo $imgSrc34; ?>" id="s34s"
+                        onclick="<?php echo $imgF34; ?>" alt=""></label>
+                <input type="checkbox" id="s35" name="one[]" value="i3" onclick="return <?php echo " $num35 "; ?> "
+                    <?php echo $_SESSION[ 'thirtyfiveSeat' ]; ?>> <label title="I3" for="s35"><img
+                        src="<?php echo $imgSrc35; ?>" id="s35s" onclick="<?php echo $imgF35; ?>" alt=""></label>
+                <input type="checkbox" id="s36" name="one[]" value="i4" onclick="return <?php echo " $num36 "; ?> "
+                    <?php echo $_SESSION[ 'thirtysixSeat' ]; ?>> <label title="I4" for="s36"><img
+                        src="<?php echo $imgSrc36; ?>" id="s36s" onclick="<?php echo $imgF36; ?>" alt=""></label> <br>
+                <input type="checkbox" id="s37" name="one[]" value="j1" onclick="return <?php echo " $num37 "; ?> "
+                    <?php echo $_SESSION[ 'thirtysevenSeat' ]; ?>> <label title="J1" for="s37"><img
+                        src="<?php echo $imgSrc37; ?>" id="s37s" onclick="<?php echo $imgF37; ?>" alt=""></label>
+                <input type="checkbox" id="s38" name="one[]" value="j2" onclick="return <?php echo " $num38 "; ?> "
+                    <?php echo $_SESSION[ 'thirtyeightSeat' ]; ?>> <label title="J2" for="s38"
+                    style="margin-right:30px;"><img src="<?php echo $imgSrc38; ?>" id="s38s"
+                        onclick="<?php echo $imgF38; ?>" alt=""></label>
+                <input type="checkbox" id="s39" name="one[]" value="j3" onclick="return <?php echo " $num39 "; ?> "
+                    <?php echo $_SESSION[ 'thirtynineSeat' ]; ?>> <label title="J3" for="s39"><img
+                        src="<?php echo $imgSrc39; ?>" id="s39s" onclick="<?php echo $imgF39; ?>" alt=""></label>
+                <input type="checkbox" id="s40" name="one[]" value="j4" onclick="return <?php echo " $num40 "; ?> "
+                    <?php echo $_SESSION[ 'fourtySeat' ]; ?>> <label title="J4" for="s40"><img
+                        src="<?php echo $imgSrc40; ?>" id="s40s" onclick="<?php echo $imgF40; ?>" alt=""></label>
 
                 <br><br>
 
@@ -1867,7 +1889,10 @@ else{
 
 
     <script>
-        var imgV1 = imgV2 = imgV3 = imgV4 = imgV5 = imgV6 = imgV7 = imgV8 = imgV9 = imgV10 = imgV11 = imgV12 = imgV13 = imgV14 = imgV15 = imgV16 = imgV17 = imgV18 = imgV19 = imgV20 = imgV21 = imgV22 = imgV23 = imgV24 = imgV25 = imgV26 = imgV27 = imgV28 = imgV29 = imgV30 = imgV31 = imgV32 = imgV33 = imgV34 = imgV35 = imgV36 = imgV37 = imgV38 = imgV39 = imgV40 = 0;
+        var imgV1 = imgV2 = imgV3 = imgV4 = imgV5 = imgV6 = imgV7 = imgV8 = imgV9 = imgV10 = imgV11 = imgV12 = imgV13 =
+            imgV14 = imgV15 = imgV16 = imgV17 = imgV18 = imgV19 = imgV20 = imgV21 = imgV22 = imgV23 = imgV24 = imgV25 =
+            imgV26 = imgV27 = imgV28 = imgV29 = imgV30 = imgV31 = imgV32 = imgV33 = imgV34 = imgV35 = imgV36 = imgV37 =
+            imgV38 = imgV39 = imgV40 = 0;
 
         var seatList = [];
 
@@ -1890,12 +1915,12 @@ else{
                 seatList.splice(index, 1);
             }
         }
-        
-        
-        
-        
-            
-        
+
+
+
+
+
+
 
         function imgChange1() {
 
@@ -1909,7 +1934,7 @@ else{
 
                 imgV1 = 0;
                 removeA('A1');
-                
+
             }
 
             show();
@@ -2644,8 +2669,8 @@ else{
             }
             show();
         }
-        
-        
+
+
 
         function test() {
             if (s40.checked && imgV40 == 0) {
@@ -2687,7 +2712,7 @@ else{
         // run function with time
 
         var butto = document.getElementById('clicker');
-        setInterval(function() {
+        setInterval(function () {
 
 
             butto.click();
@@ -2757,7 +2782,7 @@ else{
                     one.push(gn);
 
                     var totarlFare = (sum * perSeat) - previousFare;
-                    
+
                     var sCount = sum;
                     window.sCount;
 

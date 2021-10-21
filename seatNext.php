@@ -7,25 +7,23 @@
 
 
 
-
 if(isset($_POST['txn-submit'])){
-    
-    
+  
     $txnId = $_POST['txnId'];
     
     $email =  $_SESSION['email'];
     $userAllSeat="";
     $count = 0;
     $totalFare = 0;
-    
+
     $seatOne = $_SESSION['numOne'];
-     $seatTwo = $_SESSION['numTwo'];
-     $seatThree = $_SESSION['numThree'];
-     $seatFour = $_SESSION['numFour'];
-     $seatFive = $_SESSION['numFive'];
-     $seatSix = $_SESSION['numSix'];
-     $seatSeven = $_SESSION['numSeven'];
-     $seatEight = $_SESSION['numEight'];
+    $seatTwo = $_SESSION['numTwo'];
+    $seatThree = $_SESSION['numThree'];
+    $seatFour = $_SESSION['numFour'];
+    $seatFive = $_SESSION['numFive'];
+    $seatSix = $_SESSION['numSix'];
+    $seatSeven = $_SESSION['numSeven'];
+    $seatEight = $_SESSION['numEight'];
     
     $seatNine = $_SESSION['numNine'];
      $seatTen = $_SESSION['numTen'];
@@ -64,39 +62,24 @@ if(isset($_POST['txn-submit'])){
      
         
       if ($_SESSION['oneSeat']=="checked"){
-          
-          
-          
-          $sql = "select * from seat where state='$seatOne'";
-          
+          $sql = "select * from seat where state='$seatOne'";         
           $result = mysqli_query($db, $sql);
-              while($row = mysqli_fetch_assoc($result)){
-                  
-                  if($row['val'] != 1){
-                      
-                      $count = $count + 1;
-                      
-                       $userAllSeat = $userAllSeat."a1, "; 
-                      
-                       $sql = "UPDATE seat SET txnId = '$txnId' WHERE state='$seatOne'";
+              while($row = mysqli_fetch_assoc($result)){                 
+                  if($row['val'] != 1){                     
+                      $count = $count + 1;                     
+                        $userAllSeat = $userAllSeat."a1, ";                      
+                        $sql = "UPDATE seat SET txnId = '$txnId' WHERE state='$seatOne'";
         
-           if (mysqli_query($db, $sql)) { echo ""; }
-           else { echo "Error updating record: " . mysqli_error($db); }
-                  }
+                      if (mysqli_query($db, $sql)) { echo ""; }
+                      else { echo "Error updating record: " . mysqli_error($db); }
+                    }
               }
-          
-       
-          
           
           $sql = "UPDATE seat SET val = 1 WHERE state='$seatOne'";
         
            if (mysqli_query($db, $sql)) { echo ""; }
            else { echo "Error updating record: " . mysqli_error($db); }
-          
-          
-         
-          
-          
+            
          
        }
     
@@ -115,33 +98,32 @@ if(isset($_POST['txn-submit'])){
     
     
     
-    
-     if ($_SESSION['twoSeat']=="checked"){
-         
-         
-         $sql = "select * from seat where state='$seatTwo'";
-          
+  
+     if ($_SESSION['twoSeat']=="checked"){         
+         $sql = "select * from seat where state='$seatTwo'";     
           $result = mysqli_query($db, $sql);
+         
+
               while($row = mysqli_fetch_assoc($result)){
-                  
+               var_dump($row);
                   if($row['val'] != 1){
-                      
-                                            $count = $count + 1;
+                    
+                     $count = $count + 1;
             
                        $userAllSeat = $userAllSeat."a2, "; 
-                       $sql = "UPDATE seat SET txnId = '$txnId' WHERE state='$seatTwo'";
+                     
+                      //  $sql = "UPDATE seat SET txnId = '$txnId' WHERE state='$seatTwo'";
         
-           if (mysqli_query($db, $sql)) { echo ""; }
-           else { echo "Error updating record: " . mysqli_error($db); }
-                  }
+                  // if (mysqli_query($db, $sql)) { echo ""; }
+                  // else { echo "Error updating record: " . mysqli_error($db); }
+                          }
               }
           
           
                 $sql = "UPDATE seat SET val = 1 WHERE state='$seatTwo'";
         
            if (mysqli_query($db, $sql)) { echo ""; }
-           else { echo "Error updating record: " . mysqli_error($db); }
-          
+           else { echo "Error updating record: " . mysqli_error($db); }  
          
        }
      if ($_SESSION['threeSeat']=="checked"){
@@ -1617,100 +1599,71 @@ if(isset($_POST['submit'])){
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-       <style>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    input[type=text] {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
 
 
-input[type=text] {
-    width: 300%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-    
+    input[type=submit] {
+      width: 50%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-input[type=submit] {
-    width: 50%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-    
-        .txnId{
-            
-            
-            width: 50%;
-            padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-            
-        }
-        .txnIdL{
-            
-            font-size: 120%;
-            
-        }
-        
+    .txnId {
 
 
-</style>
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
 
-        
-        
-        
-        
-        
-        
-        
-        
-      
+    }
 
+    .txnIdL {
 
+      font-size: 120%;
+
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="container">
+  <div class="container">
 
 
-        <h3>Send your money below account</h3> <br>
+    <h3>Send your money below account</h3> <br>
 
-        <h3>Rocket Account No. 01911223344</h3> <br>
-        <form action="" method="post">
+    <h3>Rocket Account No. 01911223344</h3> <br>
+    <form action="" method="post">
+      <label for="txnId" class="txnIdL">Your txnId</label> <br>
+      <input type="text" name="txnId" id="txnId" class="txnId" required> <br>
+      <label for="phone" class="txnIdL">Phone no. which use for payment</label> <br>
+      <input type="text" id="phone" name="phone" class="txnId" required>
+      <input type="submit" name="txn-submit" value="Submit">
 
-
-
-            <label for="txnId" class="txnIdL">Your txnId</label> <br>
-            <input type="text" name="txnId" id="txnId" class="txnId" required> <br>
-            <label for="phone" class="txnIdL">Phone no. which use for payment</label> <br>
-            <input type="text" id="phone" name="phone" class="txnId" required> 
-            <input type="submit" name="txn-submit" value="Submit">
-
-        </form>
-
-
-
-
-
-
-        
-    </div>
-
+    </form>
+  </div>
 </body>
 
 </html>
-
 
 <?php include 'footer.php'; ?>

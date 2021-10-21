@@ -2,48 +2,29 @@
 <?php
 
 if(isset($_POST['submit'])){
-    
-    
-    
     $busDesA = $_POST['from'];
     $busDesB = $_POST['to'];
     $c = $_POST['bDate'];
     
-    
-$busDes = "";
+    $busDes = "";
    
 
     if($busDesA=='dhaka1' || $busDesA=='dhaka2'){
-        
-        $busDesA = 'dhaka';
-        
-        
-        
+        $busDesA = 'dhaka';  
     }
      if($busDesB=='dhaka1' || $busDesB=='dhaka2'){
-
-    $busDesB = 'dhaka';
-   
-
-  }
+        $busDesB = 'dhaka';
     
-       $_SESSION['busDesA'] = $busDesA;
-    $_SESSION['busDesB'] = $busDesB;
-       
-       
-       
+    }
         
+        $_SESSION['busDesA'] = $busDesA;
+        $_SESSION['busDesB'] = $busDesB;
+
          $_SESSION['busDate'] = $c;
-        
-        
+               
        // header("Location: seat.php");
-        
-    
-    
-    
+
 }  
-
-
 
 
 ?>
@@ -61,97 +42,89 @@ $busDes = "";
         
         
         $bTime = $_POST['bTime'];
-        
-         $_SESSION['busTime'] = $bTime;
+        $_SESSION['busTime'] = $bTime;
         
         $busType = $_POST['busType'];
         $_SESSION['busType'] = $busType;
-        
-       
-        
-      header("Location: seat.php");
 
-        
+        header("Location: seat.php");
     }
 
 
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-   <link rel="stylesheet" href="css/buslist.css">
-    
+    <link rel="stylesheet" href="css/buslist.css">
+
     <title>List of Bus</title>
     <style>
-    
-    tr:nth-child(even) {background-color: #f2f2f2;
-        font-size: 120%;
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+            font-size: 120%;
         }
-    tr:nth-child(odd) {background-color: #747890;
-        font-size: 120%;}
-    
-    
+
+        tr:nth-child(odd) {
+            background-color: #747890;
+            font-size: 120%;
+        }
     </style>
-    
-    
 </head>
+
 <body>
-   <div class="container">
-      <?php 
-       $email = $_SESSION['email'];
+    <div class="container">
+        <?php 
+    //    $email = $_SESSION['email'];
        
-       $sql = "SELECT acBus, nonAcBus FROM users WHERE email = '$email' ";
-       $res = mysqli_query($db, $sql);
-       $row = mysqli_fetch_assoc($res);
-       $acBus = $row['acBus'];
-       $nonAcBus = $row['nonAcBus'];
-       $acBus = (int)$acBus;
-       $nonAcBus = (int)$nonAcBus;
+    //    $sql = "SELECT acBus, nonAcBus FROM users WHERE email = '$email' ";
+    //    $res = mysqli_query($db, $sql);
+    //    $row = mysqli_fetch_assoc($res);
+    //    $acBus = $row['acBus'];
+    //    $nonAcBus = $row['nonAcBus'];
+    //    $acBus = (int)$acBus;
+    //    $nonAcBus = (int)$nonAcBus;
       
-       if($acBus > $nonAcBus){
+    //    if($acBus > $nonAcBus){
            
-        echo '<div style="text-align: center;">
-            <h3 style="margin: 10px 0px;">Maximum time you travel with Ac Bus. So, You can try our AC Bus</h3>
-        </div>';
-       }else {
+    //     echo '<div style="text-align: center;">
+    //         <h3 style="margin: 10px 0px;">Maximum time you travel with Ac Bus. So, You can try our AC Bus</h3>
+    //     </div>';
+    //    }else {
            
-       }
+    //    }
        $sql = "SELECT * FROM bus WHERE busDate='$c' AND busDesA='$busDesA' AND busDesB='$busDesB'";
        $result = mysqli_query($db, $sql);
        
        
        ?>
-      
-      
-                           <?php  $noBus = "There is no bus available"; ?>
-                           <?php while($row = mysqli_fetch_assoc($result)): ?> 
-                                <form action="" method="post">
+
+
+        <?php  $noBus = "There is no bus available"; ?>
+        <?php while($row = mysqli_fetch_assoc($result)): ?>
+        <form action="" method="post">
 
 
             <table class="table">
-             
-                
+
+
                 <tr>
-                    
+
                     <th>Bus Name</th>
                     <th>Bus Type</th>
                     <th>Bus Date</th>
                     <th>Bus Time</th>
                     <th>Bus From</th>
                     <th>Bus To</th>
-                    
+
                     <th></th>
-                  
+
                 </tr>
-                
+
                 <tr>
-                   
+
 
                     <td><?php echo $row['busName']; ?></td>
                     <td><?php
@@ -168,39 +141,40 @@ $busDes = "";
                     <td><?php echo $row['busTime']; ?></td>
                     <td><?php echo $row['busDesA']; ?></td>
                     <td><?php echo $row['busDesB']; ?></td>
-                    <td><input type="text" style="display:none"; value="<?php echo $row['id']; ?>" name="idVal">
-                    <input type="text" style="display:none"; value="<?php echo $row['busTime']; ?>" name="bTime">
-                    <input type="hidden" value="<?php echo $row['busType']; ?>" name="busType">
-                    <input type="submit"  class="btn btn-success" name="buslist-submit" value="View Seat"></td>
-                    
-                   <?php  $noBus = ""; ?>
-                
-                      
+                    <td><input type="text" style="display:none" ; value="<?php echo $row['id']; ?>" name="idVal">
+                        <input type="text" style="display:none" ; value="<?php echo $row['busTime']; ?>" name="bTime">
+                        <input type="hidden" value="<?php echo $row['busType']; ?>" name="busType">
+                        <input type="submit" class="btn btn-success" name="buslist-submit" value="View Seat"></td>
 
-                
-               
-                
-                
+                    <?php  $noBus = ""; ?>
+
+
+
+
+
+
+
             </table>
-            
-            
-            
-              </form>
-            
-            
-                            <?php endwhile; ?>
 
-            
-            <h3 style="color:#b70d0d";><?php echo $noBus; ?></h3>
-            
-         
-         
-    
-        
+
+
+        </form>
+
+
+        <?php endwhile; ?>
+
+
+        <h3 style="color:#b70d0d" ;><?php echo $noBus; ?></h3>
+
+
+
+
+
     </div>
-   
-    
+
+
 </body>
+
 </html>
 
 

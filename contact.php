@@ -8,17 +8,10 @@
         $phone = $_POST['phone'];
         $website = $_POST['website'];
         $comment = $_POST['message'];
-        
         $sql = "INSERT INTO contact(username, email, phone, website, comment) VALUES('$username', '$email', '$phone', '$website', '$comment')";
         mysqli_query($db, $sql);
-        
-        
     }
-
-
 ?>
-   
-   
     <section id="contact_banner">
         <div class="container">
             <div class="row">
@@ -86,4 +79,5 @@
         </div>
     </section>
     <!--contact_form part ends-->
+    
     <?php include 'footer.php'; ?>
