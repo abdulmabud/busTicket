@@ -84,7 +84,7 @@ header .top .number ul li a span{
     font-size: 14px;
 }
 header .logo{
-    padding: 21px 0px;
+    padding: 18px 0px;
 }
 header nav ul{
     float: right;
@@ -173,7 +173,7 @@ header .container .row .contact_button a:hover{
 #startup .boost img{
     padding-top: 82px;
     position: relative;
-    padding-bottom: 
+    /* padding-bottom:  */
 }
 #startup .boost h3{
     position: relative;
@@ -194,7 +194,7 @@ header .container .row .contact_button a:hover{
 #startup .boost1 img{
     padding-top: 0px;
     position: relative;
-    padding-bottom: 
+    /* padding-bottom:  */
 }
 #startup .boost1 h3{
     position: relative;
@@ -215,7 +215,7 @@ header .container .row .contact_button a:hover{
 #startup .boost2 img{
     padding-top: 0px;
     position: relative;
-    padding-bottom: 
+    /* padding-bottom:  */
 }
 #startup .boost2 h3{
     position: relative;
@@ -474,7 +474,7 @@ footer .border{
 .blu{
     display: inline-block;
     margin-top: -117px;
-    margin-left: 1060px;
+    margin-left: 935px;
     height: 200px;
 }
 /*End footer part*/

@@ -32,7 +32,7 @@
       <div class="col-md-3 col-sm-5 address hidden-xs">
         <p>Contact</p>
         <h6>Address:</h6><span>Mohammadpur Dhaka,Bangladesh</span>
-        <h6>Phone:</h6><span>+8801743918787</span>
+        <h6>Phone:</h6><span>+880 17000000</span>
         <h6>Email:</h6><span>mabud@myself.com</span>
       </div>
       <div class="col-md-3 hidden-sm hidden-xs">
