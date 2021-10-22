@@ -105,17 +105,17 @@ if(isset($_POST['txn-submit'])){
          
 
               while($row = mysqli_fetch_assoc($result)){
-               var_dump($row);
+            
                   if($row['val'] != 1){
                     
                      $count = $count + 1;
             
                        $userAllSeat = $userAllSeat."a2, "; 
                      
-                      //  $sql = "UPDATE seat SET txnId = '$txnId' WHERE state='$seatTwo'";
+                       $sql = "UPDATE seat SET txnId = '$txnId' WHERE state='$seatTwo'";
         
-                  // if (mysqli_query($db, $sql)) { echo ""; }
-                  // else { echo "Error updating record: " . mysqli_error($db); }
+                  if (mysqli_query($db, $sql)) { echo ""; }
+                  else { echo "Error updating record: " . mysqli_error($db); }
                           }
               }
           
@@ -995,7 +995,7 @@ if(isset($_POST['txn-submit'])){
        }
     
     if ($_SESSION['thirtysevenSeat']=="checked"){
-          
+     
         $sql = "select * from seat where state='$seatThirtyseven'";
           
           $result = mysqli_query($db, $sql);
@@ -1021,12 +1021,12 @@ if(isset($_POST['txn-submit'])){
        }
     
     if ($_SESSION['thirtyeightSeat']=="checked"){
-          
+     
         $sql = "select * from seat where state='$seatThirtyeight'";
           
           $result = mysqli_query($db, $sql);
+         
               while($row = mysqli_fetch_assoc($result)){
-                  
                   if($row['val'] != 1){
                       
                        $userAllSeat = $userAllSeat."j2, ";
@@ -1058,7 +1058,7 @@ if(isset($_POST['txn-submit'])){
                        $userAllSeat = $userAllSeat."j3, ";
                       $count = $count + 1;
                       $sql = "UPDATE seat SET txnId = '$txnId' WHERE state='$seatThirtynine'";
-        
+              
            if (mysqli_query($db, $sql)) { echo ""; }
            else { echo "Error updating record: " . mysqli_error($db); }
                   }
@@ -1565,7 +1565,7 @@ if(isset($_POST['submit'])){
            $thirtynineSeat  = "checked";
           
                                             $_SESSION['thirtynineSeat'] = $thirtynineSeat;
- 
+         
             
             
        }

@@ -97,7 +97,7 @@ if(isset($_POST['submit'])){
     //    }
        $sql = "SELECT * FROM bus WHERE busDate='$c' AND busDesA='$busDesA' AND busDesB='$busDesB'";
        $result = mysqli_query($db, $sql);
-       
+    
        
        ?>
 

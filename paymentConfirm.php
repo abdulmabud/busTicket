@@ -1,8 +1,8 @@
 <?php include 'header.php'; ?>
 <?php
-    if($_SESSION['cadminLog'] == false){
-        header('Location: index.php');
-    }
+    // if($_SESSION['cadminLog'] == false){
+    //     header('Location: index.php');
+    // }
 ?>
 <?php 
     if(isset($_POST['accept'])){    

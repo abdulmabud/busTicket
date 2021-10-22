@@ -1,3 +1,4 @@
+<?php require_once './inc/database.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,9 +12,11 @@
     <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
     <link rel="shortcut icon" href="assets/images/favicon.png" />
   </head>
   <body>
     <div class="container-scroller">
 
 <?php require './inc/siderbar.php'; ?>
+<?php require './inc/topbar.php'; ?>

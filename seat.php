@@ -17,7 +17,6 @@
     
     $sql = "SELECT fare FROM place WHERE cityF='$busDesA' AND cityT = '$busDesB' AND busType = '$busType' ";
     $result = mysqli_query($db, $sql);
-    // var_dump($result);
     while($row = mysqli_fetch_assoc($result)){ 
         $fare = $row['fare']; 
        require_once('function.php');
