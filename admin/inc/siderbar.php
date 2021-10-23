@@ -80,7 +80,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="payment.php">
               <i class="mdi mdi-contacts menu-icon"></i>
               <span class="menu-title">Payment Confirm</span>
             </a>
