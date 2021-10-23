@@ -37,10 +37,10 @@
             <div class="collapse" id="ui-basic2">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="">Show Route</a>
+                  <a class="nav-link" href="route.php">Show Route</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">Add Route</a>
+                  <a class="nav-link" href="addroute.php">Add Route</a>
                 </li>
               </ul>
             </div>
