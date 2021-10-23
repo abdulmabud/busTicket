@@ -1,14 +1,14 @@
 <?php include 'header.php'; ?>
 <?php
     $c="";
-    if(isset($_POST['addPlace-submit'])){       
+    if(isset($_POST['addRoute-submit'])){       
         $cityF = $_POST['cityF'];
         $cityT = $_POST['cityT'];
         $fare = $_POST['fare'];
         $busType = $_POST['busType'];       
-        $sql = "INSERT INTO place(cityF, cityT,fare, busType) VALUES('$cityF', '$cityT','$fare', '$busType')";        
+        $sql = "INSERT INTO routes(cityF, cityT,fare, busType) VALUES('$cityF', '$cityT','$fare', '$busType')";        
         if(mysqli_query($db, $sql)){       
-            $c = "Place Inserted Successfully";           
+            $c = "Routes Inserted Successfully";           
         }       
         else{          
             echo "Error ".mysqli_error($db);
@@ -70,7 +70,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Submit" name="addPlace-submit"></td>
+                <td><input type="submit" value="Submit" name="addRoute-submit"></td>
             </tr>
         </table>
         <br>

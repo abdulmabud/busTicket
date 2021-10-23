@@ -13,7 +13,7 @@
 
 <div class="container">
     <?php   
-        $sql = "SELECT cityF,cityT,fare FROM place";
+        $sql = "SELECT cityF,cityT,fare FROM routes";
         $result = mysqli_query($db, $sql);
     ?>
     <table class="table">

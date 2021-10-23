@@ -6,7 +6,7 @@
     <div>
         <form action="busList.php" method="post">
             <?php            
-            $sql = "SELECT DISTINCT cityF FROM place";
+            $sql = "SELECT DISTINCT cityF FROM routes";
             $result = mysqli_query($db, $sql);              
         ?>
             <label>FROM</label>
@@ -17,7 +17,7 @@
                 <?php endwhile; ?>
             </select>
             <?php 
-                $sql = "SELECT DISTINCT cityT FROM place";
+                $sql = "SELECT DISTINCT cityT FROM routes";
                 $results = mysqli_query($db, $sql);
             ?>
             <label style="padding-right:20px">TO</label>

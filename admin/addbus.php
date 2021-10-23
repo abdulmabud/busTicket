@@ -1,8 +1,8 @@
 <?php require 'header.php'; ?>
 <?php
     $db = new Database();
-    $fromCities = $db->select("SELECT DISTINCT cityF FROM place");
-    $toCities = $db->select("SELECT DISTINCT cityT FROM place");
+    $fromCities = $db->select("SELECT DISTINCT cityF FROM routes");
+    $toCities = $db->select("SELECT DISTINCT cityT FROM routes");
 ?>
 <div class="col-12 grid-margin stretch-card" style="margin-top: 90px;">
     <div class="card">

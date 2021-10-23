@@ -15,7 +15,7 @@
     $busDesB = $_SESSION['busDesB'];
     $busType = $_SESSION['busType'];
     
-    $sql = "SELECT fare FROM place WHERE cityF='$busDesA' AND cityT = '$busDesB' AND busType = '$busType' ";
+    $sql = "SELECT fare FROM routes WHERE cityF='$busDesA' AND cityT = '$busDesB' AND busType = '$busType' ";
     $result = mysqli_query($db, $sql);
     while($row = mysqli_fetch_assoc($result)){ 
         $fare = $row['fare']; 
