@@ -15,21 +15,24 @@
             $mesage = "Route Added Successfully";
         }
     }
-    if(isset($_POST['update_place'])){
-        $name = $_POST['name'];
-        $status = $_POST['status'];
+    if(isset($_POST['update_route'])){
         $id = $_POST['id'];
-        $result = $db->update("UPDATE places SET name = '$name', status = '$status' WHERE id='$id' ");
+        $from = $_POST['from'];
+        $to = $_POST['to'];
+        $busType = $_POST['bus_type'];
+        $fare = $_POST['fare'];
+        $status = $_POST['status'];
+        $result = $db->update("UPDATE routes SET cityF = '$from', cityT = '$to', busType = '$busType', fare = '$fare', status = '$status' WHERE id='$id' ");
         
         if($result){
-            $mesage = "Place Update Successfully";
+            $mesage = "Route Update Successfully";
         }
     }
-    if(isset($_POST['delete_place'])){
+    if(isset($_POST['delete_route'])){
         $id = $_POST['id'];
-        $delete = $db->delete("DELETE FROM places WHERE id='$id'");
+        $delete = $db->delete("DELETE FROM routes WHERE id='$id'");
         if($delete){
-            $mesage = "Place Deleted Successfully";
+            $mesage = "Route Deleted Successfully";
         }
     }
     $routes = $db->select("SELECT * FROM routes");
@@ -65,16 +68,16 @@
                             <td class="py-1"> <?php echo $route['fare']; ?> </td>
                             <td class="py-1"> <?php echo $route['status'] == 1 ? 'Publish':'Unpublish'; ?> </td>
                             <td class="py-1">
-                                <a href="editplace.php?id=<?php echo $route['id']; ?>" class="btn btn-primary">Edit</a>
+                                <a href="editroute.php?id=<?php echo $route['id']; ?>" class="btn btn-primary">Edit</a>
                                 <a href="" class="btn btn-danger" 
                                 onclick="
                                 event.preventDefault();
-                                document.getElementById('place_from<?php echo $route['id']; ?>').submit();"
+                                document.getElementById('route_from<?php echo $route['id']; ?>').submit();"
                                 >Delete
                             </a>
-                            <form action="" method="POST" id="place_from<?php echo $route['id']; ?>" class="d-none">
+                            <form action="" method="POST" id="route_from<?php echo $route['id']; ?>" class="d-none">
                                 <input type="hidden" name="id" value="<?php echo $route['id']; ?>">
-                                <input type="hidden" name="delete_place">
+                                <input type="hidden" name="delete_route">
                             </form>
                             </td>
                         </tr>
