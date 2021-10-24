@@ -1,6 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
-          <a class="sidebar-brand brand-logo" href="index.php"><img src="assets/images/logo.svg" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo" href="index.php"><img src="assets/images/logo.jpg" alt="logo" /></a>
           <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.php"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
         </div>
         <hr>
@@ -13,7 +13,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic">
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              <i class="mdi mdi-bus menu-icon"></i>
               <span class="menu-title">Bus Info</span>
               <i class="menu-arrow"></i>
             </a>
@@ -30,7 +30,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              <i class="mdi mdi-road-variant menu-icon"></i>
               <span class="menu-title">Route Info</span>
               <i class="menu-arrow"></i>
             </a>
@@ -47,7 +47,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic">
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              <i class="mdi mdi-bank menu-icon"></i>
               <span class="menu-title">Place Info</span>
               <i class="menu-arrow"></i>
             </a>
@@ -81,13 +81,13 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="payment.php">
-              <i class="mdi mdi-contacts menu-icon"></i>
+              <i class="mdi mdi-ticket-confirmation menu-icon"></i>
               <span class="menu-title">Payment Confirm</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
-              <i class="mdi mdi-contacts menu-icon"></i>
+              <i class="mdi mdi-human-handsup menu-icon"></i>
               <span class="menu-title">User Feedback</span>
             </a>
           </li>
@@ -97,23 +97,11 @@
               <span class="menu-title">User Contact</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="mdi mdi-format-list-bulleted menu-icon"></i>
               <span class="menu-title">Role</span>
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-chart-bar menu-icon"></i>
-              <span class="menu-title">Charts</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-table-large menu-icon"></i>
-              <span class="menu-title">Tables</span>
-            </a>
-          </li>
+          </li> -->
         </ul>
       </nav>

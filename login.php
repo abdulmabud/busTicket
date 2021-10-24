@@ -13,7 +13,7 @@
             $_SESSION['cadminLog'] = false;
             $_SESSION['cLog'] = false;
             $_SESSION['isLogged'] = false;
-            header('Location:admin.php');
+            header('Location:admin/index.php');
             
         }
         

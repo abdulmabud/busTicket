@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  if($_SESSION['adminLog']==false){   
+    header('Location: ../login.php');
+}
+
+?>
 <?php require_once './inc/database.php'; ?>
 <?php $message = ''; ?>
 <!DOCTYPE html>
