@@ -17,7 +17,7 @@
                     <label for="exampleFormControlSelect1">From</label>
                     <select class="form-control form-control-lg" name="city_from" id="exampleFormControlSelect1">
                         <?php while($fromCity = $fromCities->fetch_assoc()){ ?>
-                        <option><?php echo $fromCity['cityF'] ?></option>
+                        <option><?php echo $fromCity['cityF']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -25,7 +25,7 @@
                     <label for="exampleFormControlSelect2">To</label>
                     <select class="form-control form-control-lg" name="city_to" id="exampleFormControlSelect2">
                         <?php while($toCity = $toCities->fetch_assoc()){ ?>
-                        <option><?php echo $toCity['cityT'] ?></option>
+                        <option><?php echo $toCity['cityT']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
