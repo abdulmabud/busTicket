@@ -3,13 +3,14 @@
     if(isset($_POST['con_submit'])){
         
     $username=$email=$phone=$website=$comment ='';
-        $username = $_POST['username'];
+        $username = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $website = $_POST['website'];
         $comment = $_POST['message'];
         $sql = "INSERT INTO contact(username, email, phone, website, comment) VALUES('$username', '$email', '$phone', '$website', '$comment')";
         mysqli_query($db, $sql);
+        $message = "Thanks for contact us. We will give feedback soon";
     }
 ?>
     <section id="contact_banner">
@@ -26,6 +27,11 @@
     <div class="clearfix"></div>
     <section id="contact_text">
         <div class="container">
+        <?php if(isset($message) && $message != '' ): ?>
+        <div class="bg-primary" style="padding: 10px; margin: 10px 0; border-radius: 10px;">
+            <h3><?php echo $message; ?></h3>
+        </div>
+        <?php $message=''; endif; ?>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 contact_text_part">
                     <h2>Our location</h2>
@@ -62,11 +68,11 @@
                     <h2>contact form</h2>
                     <form action="" method="post">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" class="name" name="username" placeholder="NAME" required>
+                            <input type="text" class="name" name="name" placeholder="NAME" required>
                             <input type="text" class="name" name="phone" placeholder="PHONE" required>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" class="email" name="email" placeholder="EMAIL" required>
+                            <input type="email" class="email" name="email" placeholder="EMAIL" required>
                             <input type="text" class="name" name="website" placeholder="WEBSITE">
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
